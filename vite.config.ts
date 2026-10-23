@@ -9,7 +9,7 @@ export default defineConfig({
     tailwind(),
     VitePWA({
       registerType: "prompt",
-      includeAssets: ["turtle.svg", "apple-touch-icon.png"],
+      includeAssets: ["turtle.webp", "apple-touch-icon.png"],
       manifest: {
         name: "Little Turtle Planner",
         short_name: "Черепашка",
@@ -30,7 +30,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,png,svg,woff2}"],
+        globPatterns: ["**/*.{js,css,html,png,webp,svg,woff2}"],
         navigateFallback: "index.html",
       },
     }),

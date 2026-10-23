@@ -97,6 +97,20 @@ test("задачи, привычки, календарь, резервная к�
   });
   await context.setOffline(true);
   await page.reload();
+  // The replacement mascot must decode from the service worker cache offline.
+  expect(
+    await page.evaluate(async () => {
+      const source = document
+        .querySelector(".turtle image")
+        ?.getAttribute("href");
+      if (!source) return false;
+      const response = await fetch(source);
+      const image = await createImageBitmap(await response.blob());
+      const decoded = response.ok && image.width > 0 && image.height > 0;
+      image.close();
+      return decoded;
+    }),
+  ).toBe(true);
   await expect(
     page.getByText("Полить любимые цветы", { exact: true }),
   ).toBeVisible();
